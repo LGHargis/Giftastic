@@ -19,6 +19,7 @@
 
 <body>
     <div id="giphys-view">This is where the buttons will be</div>
+    <div id="images-view"></div>
 
     <!-- <form id="movie-form">
           <label for="movie-input">Add a Movie, Yo!</label>
@@ -34,7 +35,10 @@
     <script type="text/javascript">
 
         var giphys = ["Cats", "Dogs", "Ducks", "Goats"];
-
+        $(document).on('click', ".giphy", function () {
+            var currentsearchTerm = $(this).attr("data-name");
+            renderImage(currentsearchTerm);
+        })
         function renderButtons() {
             $("#giphys-view").empty();
             for (var i = 0; i < giphys.length; i++) {
@@ -47,13 +51,39 @@
         };
         renderButtons();
         console.log(renderButtons());
-        var animal = "cats";
-        var queryURL = "https://api.giphy.com/v1/gifs/search?q=cats&api_key=N6gs90gKX9P7ojEA7ntmVRazPb8AYr1u&limit=5"
-        $.ajax({
-            url: queryURL,
-            method: "GET"
-        });
-        console.log($.ajax());
+
+
+
+
+        function renderImage(queryTerm) {
+            var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + queryTerm + "&api_key=N6gs90gKX9P7ojEA7ntmVRazPb8AYr1u&limit=5"
+            $.ajax({
+                url: queryURL,
+                method: "GET"
+            }).done(function (data, err) {
+                $('#images-view').empty();
+
+                //For loop here
+                for
+                (var i = 0; i < data.data.length; i++) {
+                    var gifImage = data.data[i].images.fixed_height.url;
+                    var stillImage = data.data[i].images.fixed_height_still.url;
+                    var rating = data.data[i].rating;
+
+                    var newHtml = `
+                <div>
+                <img src="${stillImage}" data-state="still" data-gif="${gifImage}" data-still="${stillImage}" alt="giphy">
+                <p>Rating: ${rating}</p>
+                </div>
+                `;
+                    $("#images-view").append(newHtml);
+                };
+                //Here we add all our imagers to the DOM
+                //We need to ensure the images div we are working with is emptied
+                //THen we need to iterate over the images array returned and place the correct data into an html template to be 
+                //appended to the DOM
+            });
+        }
 
         // //Take the items from the array and create an image within HTML.
         // //make a loop that appends a button for each string in the array.

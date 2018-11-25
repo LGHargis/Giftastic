@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Gettin Giphy</title>
+    <style type="text/css">
+        button,
+        div,
+        form,
+        input {
+            margin: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="giphys-view">This is where the buttons will be</div>
+
+    <!-- <form id="movie-form">
+          <label for="movie-input">Add a Movie, Yo!</label>
+          <input type="text" id="movie-input"><br>
+    
+          Button triggers new movie to be added -->
+    <!-- <input id="add-movie" type="submit" value="Add a Movie, Yo!">
+        </form> -->
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+
+        var giphys = ["Cats", "Dogs", "Ducks", "Goats"];
+
+        function renderButtons() {
+            $("#giphys-view").empty();
+            for (var i = 0; i < giphys.length; i++) {
+                var a = $("<button>");
+                a.addClass("giphy");
+                a.attr("data-name", giphys[i]);
+                a.text(giphys[i]);
+                $("#giphys-view").append(a);
+            }
+        };
+        renderButtons();
+        console.log(renderButtons());
+        var animal = "cats";
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=cats&api_key=N6gs90gKX9P7ojEA7ntmVRazPb8AYr1u&limit=5"
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        });
+        console.log($.ajax());
+
+        // //Take the items from the array and create an image within HTML.
+        // //make a loop that appends a button for each string in the array.
+        // //User clicks the button, page grabs 10 static Gifs from the Giphy api and places them on page.
+        // //When the user clicks a still giphy image, the gif animates. When clicked again, it will stop playing. 
+        // $(".gif").on("click", function () {
+        //     var state = $(this).attr("data-state");
+        //     if (state === "still") {
+        //         $(this).attr("src", $(this).attr("data-animate"));
+        //         $(this).attr("data-state", "animate");
+        //     } else {
+        //         $(this).attr("src", $(this).attr("data-still"));
+        //         $(this).attr("data-state", "still");
+        //     }
+        // });
+//Under every gif, display its rating (PG, G, so on). This data is provided by the GIPHY api
+//Add a form to your page takes the value from a user input box and adds it into your topics array. Then make a function call that takes each topic in the array remakes the buttons on the page. 
+
+
+    </script>
+</body>
+
+</html>

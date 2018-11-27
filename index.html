@@ -21,14 +21,11 @@
     <div id="giphys-view">This is where the buttons will be</div>
     <div id="images-view"></div>
 
-    <!-- <form id="movie-form">
-          <label for="movie-input">Add a Movie, Yo!</label>
-          <input type="text" id="movie-input"><br>
-    
-          Button triggers new movie to be added -->
-    <!-- <input id="add-movie" type="submit" value="Add a Movie, Yo!">
-        </form> -->
-
+    <form id="search-form">
+        <label for="word-input">Create Your Own</label>
+        <input type="text" id="word-input"><br>
+        <input id="add-gify" type="submit" value="submit">
+    </form>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -56,14 +53,12 @@
 
 
         function renderImage(queryTerm) {
-            var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + queryTerm + "&api_key=N6gs90gKX9P7ojEA7ntmVRazPb8AYr1u&limit=5"
+            var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + queryTerm + "&api_key=N6gs90gKX9P7ojEA7ntmVRazPb8AYr1u&limit=10"
             $.ajax({
                 url: queryURL,
                 method: "GET"
             }).done(function (data, err) {
                 $('#images-view').empty();
-
-                //For loop here
                 for
                 (var i = 0; i < data.data.length; i++) {
                     var gifImage = data.data[i].images.fixed_height.url;
@@ -78,28 +73,20 @@
                 `;
                     $("#images-view").append(newHtml);
                 };
-                //Here we add all our imagers to the DOM
-                //We need to ensure the images div we are working with is emptied
-                //THen we need to iterate over the images array returned and place the correct data into an html template to be 
-                //appended to the DOM
             });
         }
 
-        // //Take the items from the array and create an image within HTML.
-        // //make a loop that appends a button for each string in the array.
-        // //User clicks the button, page grabs 10 static Gifs from the Giphy api and places them on page.
-        // //When the user clicks a still giphy image, the gif animates. When clicked again, it will stop playing. 
-        // $(".gif").on("click", function () {
-        //     var state = $(this).attr("data-state");
-        //     if (state === "still") {
-        //         $(this).attr("src", $(this).attr("data-animate"));
-        //         $(this).attr("data-state", "animate");
-        //     } else {
-        //         $(this).attr("src", $(this).attr("data-still"));
-        //         $(this).attr("data-state", "still");
-        //     }
-        // });
-//Under every gif, display its rating (PG, G, so on). This data is provided by the GIPHY api
+        $("#images-view").on("click", 'img', function () {
+            var state = $(this).attr("data-state");
+            if (state === "still") {
+                $(this).attr("src", $(this).attr("data-gif"));
+                $(this).attr("data-state", "animate");
+            } else {
+                $(this).attr("src", $(this).attr("data-still"));
+                $(this).attr("data-state", "still");
+            }
+        });
+
 //Add a form to your page takes the value from a user input box and adds it into your topics array. Then make a function call that takes each topic in the array remakes the buttons on the page. 
 
 

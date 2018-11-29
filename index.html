@@ -6,91 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Gettin Giphy</title>
-    <style type="text/css">
-        button,
-        div,
-        form,
-        input {
-            margin: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 
 </head>
 
 <body>
-    <div id="giphys-view">This is where the buttons will be</div>
-    <div id="images-view"></div>
-
-    <form id="search-form">
-        <label for="word-input">Create Your Own</label>
-        <input type="text" id="word-input"><br>
-        <input id="add-gify" type="submit" value="submit">
-    </form>
-
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="display-4">Giphy Creation and Animation Station</h1>
+                    <div id="giphys-view"></div>
+                    <form id="search-form">
+                        <label for="word-input">Create Your Own</label>
+                        <input type="text" id="word-input"><br>
+                        <input id="add-giphy" type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div id="images-view" class="col-lg-3"></div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript">
-
-        var giphys = ["Cats", "Dogs", "Ducks", "Goats"];
-        $(document).on('click', ".giphy", function () {
-            var currentsearchTerm = $(this).attr("data-name");
-            renderImage(currentsearchTerm);
-        })
-        function renderButtons() {
-            $("#giphys-view").empty();
-            for (var i = 0; i < giphys.length; i++) {
-                var a = $("<button>");
-                a.addClass("giphy");
-                a.attr("data-name", giphys[i]);
-                a.text(giphys[i]);
-                $("#giphys-view").append(a);
-            }
-        };
-        renderButtons();
-        console.log(renderButtons());
-
-
-
-
-        function renderImage(queryTerm) {
-            var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + queryTerm + "&api_key=N6gs90gKX9P7ojEA7ntmVRazPb8AYr1u&limit=10"
-            $.ajax({
-                url: queryURL,
-                method: "GET"
-            }).done(function (data, err) {
-                $('#images-view').empty();
-                for
-                (var i = 0; i < data.data.length; i++) {
-                    var gifImage = data.data[i].images.fixed_height.url;
-                    var stillImage = data.data[i].images.fixed_height_still.url;
-                    var rating = data.data[i].rating;
-
-                    var newHtml = `
-                <div>
-                <img src="${stillImage}" data-state="still" data-gif="${gifImage}" data-still="${stillImage}" alt="giphy">
-                <p>Rating: ${rating}</p>
-                </div>
-                `;
-                    $("#images-view").append(newHtml);
-                };
-            });
-        }
-
-        $("#images-view").on("click", 'img', function () {
-            var state = $(this).attr("data-state");
-            if (state === "still") {
-                $(this).attr("src", $(this).attr("data-gif"));
-                $(this).attr("data-state", "animate");
-            } else {
-                $(this).attr("src", $(this).attr("data-still"));
-                $(this).attr("data-state", "still");
-            }
-        });
-
-//Add a form to your page takes the value from a user input box and adds it into your topics array. Then make a function call that takes each topic in the array remakes the buttons on the page. 
-
-
+    <script type="text/javascript" src="assets/javascript/giftastic.js">
     </script>
+
 </body>
 
 </html>

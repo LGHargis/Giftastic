@@ -1,0 +1,41 @@
+.jumbotron {
+    background-color: rgb(141, 200, 252);
+    border-style: double;
+    border-width: 10px;
+    border-color: rgb(4, 4, 68);
+}
+
+.container {
+    background-color: rgb(3, 3, 49);
+}
+
+.giphy {
+    margin: 5px;
+}
+
+.display-4 {
+    margin: 0;
+    color: white;
+    text-align: center;
+}
+
+p {
+    color: white;
+}
+
+#add-giphy {
+    background-color: rgb(9, 185, 185);
+    color: rgb(26, 25, 73);
+}
+
+button {
+    background-color: rgb(9, 185, 185);
+    color: rgb(26, 25, 73);
+}
+
+#search-form {
+    color: white;
+}
+#images-view{
+    margin:50px;
+}
